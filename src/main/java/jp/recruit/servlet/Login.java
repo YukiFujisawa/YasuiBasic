@@ -16,6 +16,8 @@ import jp.recruit.bean.ContentsBean;
 import jp.recruit.bean.UserBean;
 import jp.recruit.logic.ListContentsLogic;
 import jp.recruit.logic.LoginCheckLogic;
+import org.apache.commons.lang3.StringUtils;
+
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = -856700274893456786L;
 
@@ -59,11 +61,14 @@ public class Login extends HttpServlet {
 		password=request.getParameter("password").trim();
 
 		//ユーザー名とパスワードが空でなかったらログインチェック
-		if((username!=null&&!username.isEmpty())&&(password!=null&&!password.isEmpty())){
+		if(StringUtils.isNotEmpty(username) && StringUtils.isNotEmpty(password)){
 			try{
 				LoginCheckLogic loginCheck = new LoginCheckLogic();
 				//データベースに接続して、ユーザー情報を取得
 				userBean = loginCheck.authCheck(username, password);
+
+				System.out.println("username::" + userBean.getName());
+
 				//ユーザーが存在した
 				if(userBean!=null){
 					isLogin=true;
@@ -76,8 +81,10 @@ public class Login extends HttpServlet {
 					session.setAttribute("id", userBean.getId());
 					session.setAttribute("role", userBean.getRole());
 					if(userBean.getRole().equalsIgnoreCase("administrator")){
+						System.out.println("AddItem");
 						destination="/AddItem";
 					}else{
+						System.out.println("ListItem");
 						destination="/ListItem";
 					}
 				}else{
@@ -91,14 +98,14 @@ public class Login extends HttpServlet {
 			error.add("(LoginServlet)ログイン処理に失敗しました。ユーザー名とパスワードは省略できません。");
 		}
 		if(isLogin&&error.isEmpty()){
-			
+
 		}else{
 			//最終的になんらかの障害が発生している
 			error.add("(LoginServlet)ログインに失敗しました。");
 			session.setAttribute("errormessage",error);
 			destination="/WEB-INF/jsp/common/LoginError.jsp";
 		}
-		
+
 		try{
 			//データベースに接続して、TDK情報を管理する情報を取得
 			ListContentsLogic listContents = new ListContentsLogic();
@@ -111,6 +118,8 @@ public class Login extends HttpServlet {
 		//コンテンツ情報をセッションに設定
 		session.setAttribute("contents", contentsMap);
 
+		System.out.println("error::" + error);
+
 		if(!error.isEmpty()){//異常系
 			request.setAttribute("errormessage", error);
 			System.out.println("リダイレクト先："+request.getContextPath()+destination);
@@ -120,7 +129,7 @@ public class Login extends HttpServlet {
 		}else{//正常系
 			System.out.println("リダイレクト先："+request.getContextPath()+destination);
 			response.sendRedirect(request.getContextPath()+destination);
-			return;			
+			return;
 		}
 	}
 }

@@ -5,7 +5,7 @@
 <SCRIPT LANGUAGE="JavaScript">
 <!--
 	function autoLink() {
-		location.href = "/YasuiBasic/index";
+		location.href = "/yasui/index";
 	}
 	setTimeout("autoLink()", 10000);
 // -->
@@ -15,7 +15,7 @@
 <body>
 	<c:import url="header.jsp" />
 	<h2>認証に失敗しました。</h2>
-	［<a href="/YasuiBasic/index">ログインページ</a>に戻る］
+	［<a href="/yasui/index">ログインページ</a>に戻る］
 	<c:import url="/WEB-INF/jsp/common/footer.jsp" />
 </body>
 </html>
