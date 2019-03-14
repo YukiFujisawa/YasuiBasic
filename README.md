@@ -3,22 +3,30 @@
 
 ## 前準備
 
-Dockerのインストール
+### Dockerのインストール
+
 https://hub.docker.com/editions/community/docker-ce-desktop-mac
+
+### mavenのインストール
 
 ```bash:macの場合
 $ brew install maven
 ```
 
-## 起動方法
+### DB起動と初期化
 
 ```bash
 $ docker-compose up -d
 $ ./init-mysql.sh
+```
+ 
+## サーバー起動方法
+
+```bash
 $ mvn tomcat7:run
 ```
 
-## 起動停止
+## DB停止
 
 ```
 $ docker-compose down
