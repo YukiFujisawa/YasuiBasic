@@ -60,15 +60,15 @@ public class Login extends HttpServlet {
 		//パスワードの取得
 		password=request.getParameter("password").trim();
 
-		System.out.println("username::" + username);
-		System.out.println("password::" + password);
-
 		//ユーザー名とパスワードが空でなかったらログインチェック
 		if(StringUtils.isNotEmpty(username) && StringUtils.isNotEmpty(password)){
 			try{
 				LoginCheckLogic loginCheck = new LoginCheckLogic();
 				//データベースに接続して、ユーザー情報を取得
 				userBean = loginCheck.authCheck(username, password);
+
+				System.out.println("username::" + userBean.getName());
+
 				//ユーザーが存在した
 				if(userBean!=null){
 					isLogin=true;
@@ -81,8 +81,10 @@ public class Login extends HttpServlet {
 					session.setAttribute("id", userBean.getId());
 					session.setAttribute("role", userBean.getRole());
 					if(userBean.getRole().equalsIgnoreCase("administrator")){
+						System.out.println("AddItem");
 						destination="/AddItem";
 					}else{
+						System.out.println("ListItem");
 						destination="/ListItem";
 					}
 				}else{
@@ -115,6 +117,8 @@ public class Login extends HttpServlet {
 
 		//コンテンツ情報をセッションに設定
 		session.setAttribute("contents", contentsMap);
+
+		System.out.println("error::" + error);
 
 		if(!error.isEmpty()){//異常系
 			request.setAttribute("errormessage", error);

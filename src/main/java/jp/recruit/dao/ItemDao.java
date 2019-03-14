@@ -613,7 +613,7 @@ public class ItemDao extends BaseDao{
 	 * @throws NumberFormatException
 	 */
 	public String getNextItemIdBySequence()throws SQLException,NumberFormatException{
-		String sql = "select seq_item_id.nextval from dual";
+		String sql = "select MAX( CAST(item_id AS INT))+1 from item";
 		String nextId = null;
 		ResultSet rs=null;
 		int nextMax=-1;//ダミー

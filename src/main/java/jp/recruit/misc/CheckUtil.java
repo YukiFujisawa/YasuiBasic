@@ -1,8 +1,5 @@
 package jp.recruit.misc;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -162,9 +159,19 @@ public class CheckUtil {
 		ResultSet rs=null;
 		boolean result = true;
 		try {
-			Context ctx=new InitialContext();
-			DataSource ds=(DataSource)ctx.lookup("java:comp/env/jdbc/yasui");
-			db=ds.getConnection();
+
+			try{
+				Class.forName("com.mysql.jdbc.Driver");
+			}catch (ClassNotFoundException e){
+				e.printStackTrace();
+			}
+
+			db = DriverManager.getConnection("jdbc:mysql://127.0.0.1/mydb?" +
+					"user=yasui&password=password&useUnicode=true&characterEncoding=utf-8&useSSL=false");
+
+			// Context ctx=new InitialContext();
+			// DataSource ds=(DataSource)ctx.lookup("java:comp/env/jdbc/yasui");
+			// db=ds.getConnection();
 			ps=db.prepareStatement(sql);
 			ps.setString(1, checkTargetValue);
 			rs=ps.executeQuery();
@@ -172,10 +179,6 @@ public class CheckUtil {
 				this.setError("（重複チェック）"+checkTargetName + "が重複しています");
 				result=false;
 			}
-		} catch (NamingException e) {
-			this.setError("（重複チェック）データベースと接続できません");
-			result=false;
-			e.printStackTrace(System.err);
 		} catch (SQLException e) {
 			this.setError("（重複チェック）データベースへの問い合わせに失敗しました");
 			result=false;
