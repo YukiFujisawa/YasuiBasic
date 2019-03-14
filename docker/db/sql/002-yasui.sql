@@ -61,11 +61,11 @@ INSERT INTO yasui_user VALUES ('A0001','admin','password',n'�Ǘ���','adm
 INSERT INTO yasui_user VALUES ('C0001','customer1','password',n'����^�i','user',0);
 INSERT INTO yasui_user VALUES ('C0002','customer2','password',n'�{�c�\�C','user',0);
 
-INSERT INTO item VALUES ('00001',n'�L�b�`���e�[�u���i���j','http://localhost:8080/YasuiBasic/img/00001.jpg','100x60x70',19800,0);
-INSERT INTO item VALUES ('00002',n'�f�X�N�i�u���E���j','http://localhost:8080/YasuiBasic/img/00002.jpg','100x60x70',123500,0);
-INSERT INTO item VALUES ('00003',n'�����i�j','http://localhost:8080/YasuiBasic/img/00003.jpg','100x60x70',9800,0);
-INSERT INTO item VALUES ('00004',n'�x�b�h','http://localhost:8080/YasuiBasic/img/00004.jpg','100x60x70',354800,0);
-INSERT INTO item VALUES ('00005',n'�\�t�@�[','http://localhost:8080/YasuiBasic/img/00005.jpg','100x60x70',99999,0);
+INSERT INTO item VALUES ('00001',n'�L�b�`���e�[�u���i���j','http://localhost:8080/yasui/img/00001.jpg','100x60x70',19800,0);
+INSERT INTO item VALUES ('00002',n'�f�X�N�i�u���E���j','http://localhost:8080/yasui/img/00002.jpg','100x60x70',123500,0);
+INSERT INTO item VALUES ('00003',n'�����i�j','http://localhost:8080/yasui/img/00003.jpg','100x60x70',9800,0);
+INSERT INTO item VALUES ('00004',n'�x�b�h','http://localhost:8080/yasui/img/00004.jpg','100x60x70',354800,0);
+INSERT INTO item VALUES ('00005',n'�\�t�@�[','http://localhost:8080/yasui/img/00005.jpg','100x60x70',99999,0);
 
 INSERT INTO stock VALUES ('00001',25,0);
 INSERT INTO stock VALUES ('00002',25,0);

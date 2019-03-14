@@ -1,4 +1,4 @@
-# YasuiBasic
+# yasui
 ヤスイ家具基本版
 
 ## 前準備

@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context>
+<Context docBase="yasui" path="/yasui" reloadable="true" >
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
     <Resource name="jdbc/yasui"
               auth="Container"
               type="javax.sql.DataSource"
-              username="yasui" password="password"
-              driverClassName="ocom.mysql.jdbc.Driver"
-              url="jdbc:mysql://localhost:3306/mydb"
-              maxActive="20" maxWait="-1" maxIdle="10"/>
+              username="yasui"
+              password="password"
+              driverClassName="com.mysql.cj.jdbc.Driver"
+              url="jdbc:mysql://127.0.0.1:3306/mydb"
+              maxActive="20"
+              maxWait="10000"
+              maxIdle="10"/>
 </Context>

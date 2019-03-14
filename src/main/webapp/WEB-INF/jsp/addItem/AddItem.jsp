@@ -46,11 +46,11 @@
 				</fieldset>
 				<fieldset>
 					<legend>商品画像URL</legend>
-					<input size=52 value="http://localhost:8080/YasuiBasic/img/"
+					<input size=52 value="http://localhost:8080/yasui/img/"
 						class="validate[required,maxSize[50]] text-input" type="text"
 						name="imgurl" id="imgurl"
-						placeholder="http://localhost:8080/YasuiBasic/img/nnnnn.jpg" />
-					（最大50文字まで）http://ホスト名:ポート番号/YasuiBasic/img/画像名
+						placeholder="http://localhost:8080/yasui/img/nnnnn.jpg" />
+					（最大50文字まで）http://ホスト名:ポート番号/yasui/img/画像名
 				</fieldset>
 				<fieldset>
 					<legend>商品サイズ</legend>

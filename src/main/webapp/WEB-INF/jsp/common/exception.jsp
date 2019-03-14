@@ -53,7 +53,7 @@ a:hover {
 		</p>
 		<hr />
 		<p>
-			<a href="http://localhost:8080/YasuiBasic/"> サイトのトップページに戻る </a>
+			<a href="http://localhost:8080/yasui/"> サイトのトップページに戻る </a>
 		</p>
 	</div>
 	<c:if test="${initParam['mode.debug']=='true'}">

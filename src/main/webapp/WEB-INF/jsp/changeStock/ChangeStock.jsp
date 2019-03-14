@@ -10,7 +10,7 @@
 	<c:choose>
 		<c:when test="${role != 'administrator'}">
 			<h2>管理者以外はこの画面にアクセスすることはできません。</h2>
-			<form method="POST" action="/YasuiBasic/Index">
+			<form method="POST" action="/yasui/Index">
 				<input type="submit" name="return" value="ログイン画面に戻る" />
 			</form>
 		</c:when>

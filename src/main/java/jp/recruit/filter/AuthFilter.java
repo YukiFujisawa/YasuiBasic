@@ -77,7 +77,7 @@ public class AuthFilter implements Filter {
       System.out.println("Login check NG");
       error.add("本サービスの利用にはログインが必要です。ログインしてください。");
       session.setAttribute("errormessage", error);
-      response.sendRedirect("/YasuiBasic/index");
+      response.sendRedirect("/yasui/index");
       return;
     } else {
       //ログイン済みの場合
@@ -88,7 +88,7 @@ public class AuthFilter implements Filter {
           System.out.println("Role check NG");
           error.add("管理画面には管理者以外アクセスできません。管理者でログインしてください。");
           session.setAttribute("errormessage", error);
-          response.sendRedirect("/YasuiBasic/index");
+          response.sendRedirect("/yasui/index");
           return;
       }
       chain.doFilter(req, res);

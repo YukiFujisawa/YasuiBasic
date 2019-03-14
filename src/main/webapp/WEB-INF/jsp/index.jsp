@@ -15,7 +15,7 @@
 		<c:remove var="errormessage" />
 		<%--表示が終わったエラーメッセージはセッションから削除する --%>
 	</c:if>
-	<form method="POST" action="/YasuiBasic/Login">
+	<form method="POST" action="/yasui/Login">
 		<fieldset style="border: none">
 			<legend>顧客ID：</legend>
 			<input type="text" name="username" size="20" maxlength="30"

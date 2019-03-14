@@ -42,16 +42,16 @@ a:hover {
 </head>
 <body class="login">
 	<div class="error_page">
-		<img alt="sorry" src="http://localhost:8080/YasuiBasic/img/sad.gif">
+		<img alt="sorry" src="http://localhost:8080/yasui/img/sad.gif">
 		<h1>We're sorry...</h1>
 		<p>
 			不正なメソッドでページがアクセスされました。 <br /> <a
-				href="http://localhost:8080/YasuiBasic/">トップページ</a>から探していただくか、アクセスしたURLを<a
+				href="http://localhost:8080/yasui/">トップページ</a>から探していただくか、アクセスしたURLを<a
 				href="mailto:foo@bar.com"> YASUI家具ヘルプデスク </a> までご連絡ください。
 		</p>
 		<hr />
 		<p>
-			<a href="http://localhost:8080/YasuiBasic/"> サイトのトップページに戻る </a>
+			<a href="http://localhost:8080/yasui/"> サイトのトップページに戻る </a>
 		</p>
 	</div>
 

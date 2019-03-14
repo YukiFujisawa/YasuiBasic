@@ -57,6 +57,8 @@ public class UserDao extends BaseDao{
 		ResultSet rs=null;
 		String sql = "SELECT user_id,name,passwd,descript,role FROM yasui_user " +
 				"where yasui_user.is_delete < 1 and yasui_user.name = ? and yasui_user.passwd = ?";
+		System.out.println("sql::" + sql);
+
 		try{
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1,name);
