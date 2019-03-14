@@ -350,8 +350,8 @@ public class ItemDao extends BaseDao{
 		//在庫更新のSQL
 		String updateSql = "update stock set stock_num=? where item_id=?";
 		//注文情報挿入のSQL
-		String insertSql = "insert into orders (oid,item_id,user_id,quantity,is_delivery)"+
-				" values ( ?,?,?,?,0)";
+		String insertSql = "insert into orders (oid,item_id,user_id,user_name, quantity,is_delivery)"+
+				" values ( ?,?,?,?,?,0)";
 
 		try{
 			//繰り返し処理を行う前に、PreparedStatementにSQLを渡してキャッシュ効果を高める
@@ -401,7 +401,8 @@ public class ItemDao extends BaseDao{
 				pstmtInsert.setString(1,oid);
 				pstmtInsert.setString(2,itemBean.getItemId());
 				pstmtInsert.setString(3,uid);
-				pstmtInsert.setInt(4, itemBean.getOrder());
+				pstmtInsert.setString(4,user_name);
+				pstmtInsert.setInt(5, itemBean.getOrder());
 				System.err.println("oid:"+oid+"/商品ID："+itemBean.getItemId()+"/ユーザー名："+user_name+"/注文数："+itemBean.getOrder());
 				int tempResult2 = pstmtInsert.executeUpdate();
 				System.err.println("挿入結果："+tempResult2);
@@ -613,7 +614,7 @@ public class ItemDao extends BaseDao{
 	 * @throws NumberFormatException
 	 */
 	public String getNextItemIdBySequence()throws SQLException,NumberFormatException{
-		String sql = "select MAX( CAST(item_id AS INT))+1 from item";
+		String sql = "select MAX(CONVERT(item_id,SIGNED))+1 as nextval from item";
 		String nextId = null;
 		ResultSet rs=null;
 		int nextMax=-1;//ダミー
@@ -644,7 +645,7 @@ public class ItemDao extends BaseDao{
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
 		sb.append(now.format(dateTimeFormatter));
 		//注文連番（８桁）を取得
-		String sql = "select SEQ_OID.nextval from dual";
+		String sql = "select MAX(CONVERT(item_id,SIGNED))+1 as nextval from orders";
 		int oidint=0;
 		PreparedStatement pstmt=null;
 		pstmt=con.prepareStatement(sql);

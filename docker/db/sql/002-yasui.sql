@@ -47,6 +47,7 @@ CREATE TABLE contents (
 CREATE TABLE orders  (
   oid NVARCHAR(25) NOT NULL,
   item_id NCHAR(5) NOT NULL,
+  user_id NCHAR(5)  NOT NULL,
   user_name NVARCHAR(20) NOT NULL,
   quantity INT(8) DEFAULT NULL,
   is_delivery INT(1) NOT NULL DEFAULT 0,
