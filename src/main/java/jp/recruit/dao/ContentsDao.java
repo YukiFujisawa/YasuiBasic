@@ -13,7 +13,7 @@ public class ContentsDao extends BaseDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT c.mid,c.title,c.keywd,c.descript,c.role,c.skip" +
-				" FROM YASUI.contents c";
+				" FROM contents c";
 		try{
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
