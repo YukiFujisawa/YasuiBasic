@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <Resource name="jdbc/yasui"
+              auth="Container"
+              type="javax.sql.DataSource"
+              username="yasui" password="password"
+              driverClassName="ocom.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/mydb"
+              maxActive="20" maxWait="-1" maxIdle="10"/>
+</Context>

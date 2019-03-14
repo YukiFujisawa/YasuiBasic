@@ -108,6 +108,7 @@
                     <version>2.2</version>
                     <configuration>
                         <path>/yasui</path>
+                        <contextReloadable>true</contextReloadable>
                     </configuration>
                 </plugin>
                 <plugin>

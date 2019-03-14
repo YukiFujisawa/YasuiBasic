@@ -1,66 +1,58 @@
-DROP TABLE yasui_user CASCADE CONSTRAINTS;
-DROP TABLE item CASCADE CONSTRAINTS;
-DROP TABLE stock CASCADE CONSTRAINTS;
-DROP TABLE contents CASCADE CONSTRAINTS;
-DROP TABLE orders CASCADE CONSTRAINTS;
-
-DROP SEQUENCE seq_item_id;
-DROP SEQUENCE seq_oid;
+DROP TABLE IF EXISTS yasui_user CASCADE;
+DROP TABLE IF EXISTS item CASCADE;
+DROP TABLE IF EXISTS stock CASCADE;
+DROP TABLE IF EXISTS contents CASCADE;
+DROP TABLE IF EXISTS orders CASCADE;
 
 commit;
 
-create table yasui_user(
-	user_id nchar(5) ,
-	name nvarchar2(20),
-	passwd nvarchar2(42),
-	descript nvarchar2(42),
-	role nvarchar2(30) not null,
-	is_delete number(1),
-	constraint pk_user primary key( user_id ),
-	constraint uq_data1 unique( name ),
-	constraint ck_userflag CHECK ( is_delete IN ('1', '0'))
+CREATE TABLE yasui_user(
+	user_id NCHAR(5)  NOT NULL,
+	name NVARCHAR(20) NOT NULL,
+	passwd NVARCHAR(42) NOT NULL,
+	descript NVARCHAR(42) NOT NULL,
+	role NVARCHAR(30)  NOT NULL,
+	is_delete INT(1) NOT NULL DEFAULT 0,
+	PRIMARY KEY( user_id ),
+	UNIQUE KEY uq_data1 ( name )
 );
 
-create table item(
-	item_id nchar(5) ,
-	item_name nvarchar2(50) not null,
-	imgurl nvarchar2(50),
-	item_size nvarchar2(50),
-	price number(8) not null,
-	is_delete number(1) default '0',
-	constraint pk_item primary key( item_id ),
-	constraint ck_flag CHECK ( is_delete IN ('1', '0'))
+CREATE TABLE item(
+	item_id NCHAR(5) NOT NULL ,
+	item_name NVARCHAR(50) NOT NULL,
+	imgurl NVARCHAR(50) DEFAULT NULL,
+	item_size NVARCHAR(50) DEFAULT NULL,
+	price INT(8) NOT NULL,
+	is_delete INT(1)  NOT NULL DEFAULT 0,
+	PRIMARY KEY( item_id )
 );
 
-create table stock(
-	item_id nchar(5) ,
-	stock_num number(8) not null ,
-	is_delete number(1) default '0',
-	constraint pk_stock primary key( item_id ),
-	constraint ck_stocknum CHECK ( stock_num >= '0'),
-	constraint ck_stockflag CHECK ( is_delete IN ('1', '0'))
+CREATE TABLE stock(
+	item_id NCHAR(5) NOT NULL,
+	stock_num INT(8) NOT NULL,
+	is_delete INT(1) NOT NULL DEFAULT 0,
+	PRIMARY KEY( item_id )
 );
 
-create table contents (
-  mid nvarchar2(20) NOT NULL,
-  title nvarchar2(100) default NULL,
-  keywd nvarchar2(50) default NULL,
-  descript nvarchar2(100) default NULL,
-  role nvarchar2(100) default NULL,
-  skip number(1) default NULL,
-  constraint pk_contents primary key(mid)
+CREATE TABLE contents (
+  mid NVARCHAR(20) NOT NULL,
+  title NVARCHAR(100) DEFAULT NULL,
+  keywd NVARCHAR(50) DEFAULT NULL,
+  descript NVARCHAR(100) DEFAULT NULL,
+  role NVARCHAR(100) DEFAULT NULL,
+  skip INT(1) DEFAULT 0,
+  PRIMARY KEY(mid)
 );
 
-create table orders  (
-  oid nvarchar2(25) NOT NULL,
-  user_id nchar(5) NOT NULL,
-  item_id nchar(5) NOT NULL,
-  quantity number(8,0) default NULL,
-  is_delivery number(1),
-  order_date DATE DEFAULT SYSDATE,
-  delivery_date DATE default NULL,
-  constraint pk_orders primary key(oid,item_id),
-  constraint ck_delivery CHECK ( is_delivery IN ('1', '0'))
+CREATE TABLE orders  (
+  oid NVARCHAR(25) NOT NULL,
+  item_id NCHAR(5) NOT NULL,
+  user_name NVARCHAR(20) NOT NULL,
+  quantity INT(8) DEFAULT NULL,
+  is_delivery INT(1) NOT NULL DEFAULT 0,
+  order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  delivery_date TIMESTAMP DEFAULT 0,
+  PRIMARY KEY(oid,item_id)
 );
 
 commit;
@@ -69,11 +61,11 @@ INSERT INTO yasui_user VALUES ('A0001','admin','password',n'�Ǘ���','adm
 INSERT INTO yasui_user VALUES ('C0001','customer1','password',n'����^�i','user',0);
 INSERT INTO yasui_user VALUES ('C0002','customer2','password',n'�{�c�\�C','user',0);
 
-INSERT INTO item VALUES ('00001',n'�L�b�`���e�[�u���i���j','http://localhost:8080/YasuiRLS/img/00001.jpg','100x60x70',19800,0);
-INSERT INTO item VALUES ('00002',n'�f�X�N�i�u���E���j','http://localhost:8080/YasuiRLS/img/00002.jpg','100x60x70',123500,0);
-INSERT INTO item VALUES ('00003',n'�����i�j','http://localhost:8080/YasuiRLS/img/00003.jpg','100x60x70',9800,0);
-INSERT INTO item VALUES ('00004',n'�x�b�h','http://localhost:8080/YasuiRLS/img/00004.jpg','100x60x70',354800,0);
-INSERT INTO item VALUES ('00005',n'�\�t�@�[','http://localhost:8080/YasuiRLS/img/00005.jpg','100x60x70',99999,0);
+INSERT INTO item VALUES ('00001',n'�L�b�`���e�[�u���i���j','http://localhost:8080/YasuiBasic/img/00001.jpg','100x60x70',19800,0);
+INSERT INTO item VALUES ('00002',n'�f�X�N�i�u���E���j','http://localhost:8080/YasuiBasic/img/00002.jpg','100x60x70',123500,0);
+INSERT INTO item VALUES ('00003',n'�����i�j','http://localhost:8080/YasuiBasic/img/00003.jpg','100x60x70',9800,0);
+INSERT INTO item VALUES ('00004',n'�x�b�h','http://localhost:8080/YasuiBasic/img/00004.jpg','100x60x70',354800,0);
+INSERT INTO item VALUES ('00005',n'�\�t�@�[','http://localhost:8080/YasuiBasic/img/00005.jpg','100x60x70',99999,0);
 
 INSERT INTO stock VALUES ('00001',25,0);
 INSERT INTO stock VALUES ('00002',25,0);
@@ -100,23 +92,5 @@ INSERT INTO contents VALUES ('RemoveItem','A0007:���i�폜','���i, 
 INSERT INTO contents VALUES ('RemoveItemConfirm','A0008:���i�폜�̊m�F','���i, �폜','���i�폜�̊m�F���s���܂�','administrator',0);
 INSERT INTO contents VALUES ('RemoveItemComplete','A0009:���i�폜�̊���','���i, �폜','���i�폜���������܂�','administrator',0);
 INSERT INTO contents VALUES ('RemoveItemStoreDb','A0009:���i�폜�̊���','���i, �폜','���i�폜���������܂�','administrator',0);
-
-commit;
-
-CREATE SEQUENCE seq_item_id
-START WITH 6
-INCREMENT BY 1
-MINVALUE 6
-MAXVALUE 99999
-NOCYCLE
-CACHE 10;
-
-CREATE SEQUENCE seq_oid
-START WITH 1
-INCREMENT BY 1
-MINVALUE 1
-MAXVALUE 99999999
-CYCLE
-CACHE 10;
 
 commit;
